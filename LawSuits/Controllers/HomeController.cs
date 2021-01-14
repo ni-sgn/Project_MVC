@@ -1,6 +1,7 @@
 ﻿using LawSuits.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Service.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,15 +13,19 @@ namespace LawSuits.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IUOW _uow;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IUOW uow)
         {
             _logger = logger;
+            _uow = uow;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var persons = _uow.Person.FindAll();
+            var person = _uow.Person.Get(1);
+            return View(person);
         }
 
         public IActionResult Privacy()
