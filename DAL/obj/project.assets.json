@@ -5727,11 +5727,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\user\\Documents\\coding_reps\\Project_Final\\LawSuits\\LawSuits\\LawSuits.csproj",
-      "projectName": "LawSuits",
-      "projectPath": "C:\\Users\\user\\Documents\\coding_reps\\Project_Final\\LawSuits\\LawSuits\\LawSuits.csproj",
+      "projectUniqueName": "C:\\Users\\user\\Documents\\coding_reps\\Project_Final\\LawSuits\\DAL\\DAL.csproj",
+      "projectName": "DAL",
+      "projectPath": "C:\\Users\\user\\Documents\\coding_reps\\Project_Final\\LawSuits\\DAL\\DAL.csproj",
       "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\user\\Documents\\coding_reps\\Project_Final\\LawSuits\\LawSuits\\obj\\",
+      "outputPath": "C:\\Users\\user\\Documents\\coding_reps\\Project_Final\\LawSuits\\DAL\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5792,9 +5792,6 @@
         "assetTargetFallback": true,
         "warn": true,
         "frameworkReferences": {
-          "Microsoft.AspNetCore.App": {
-            "privateAssets": "none"
-          },
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }

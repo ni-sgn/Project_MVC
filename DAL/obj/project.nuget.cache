@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "IX3TnvuGL4ni3DWA/8YxQWBXVcrDepKkyksf3mQ58425a+pcGR6XuvkY3SbqIz2Or4sC4hQ/MNTIlp+rMJkkqQ==",
+  "dgSpecHash": "BLNr8ykO8SO2XiTkhnC9lmTQipWhHC+nvcpFJKCWIxWN8uzLYxgoIhsi3dpM7KOwvdwVu+u6moWcqyMdxuZYBA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\user\\Documents\\coding_reps\\Project_Final\\LawSuits\\LawSuits\\LawSuits.csproj",
+  "projectFilePath": "C:\\Users\\user\\Documents\\coding_reps\\Project_Final\\LawSuits\\DAL\\DAL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",
