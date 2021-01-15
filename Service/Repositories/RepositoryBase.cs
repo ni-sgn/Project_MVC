@@ -20,6 +20,10 @@ namespace Service.Repositories
             this.Context = context;
         }
 
+        // these basically is an Entity framework methods
+        // which are then turned into SQL Queries ... 
+        // And database context is basically a certain Database on dbServer abstraction for classes
+        // therefore we have to know which Database to connect and send queries to...
         public void Create(T entity)
         {
             Context.Set<T>().Add(entity);

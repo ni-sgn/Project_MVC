@@ -1,8 +1,25 @@
-﻿@Model Person 
-@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model LawSuitListVM
 
-<div class="text-center">
-    <p>@Model.LastName</p>
-</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Type</th>
+            <th scope="col">ID</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.LawSuits)
+        {
+            <tr>
+                <td>@item.Body</td>
+                <td>@item.Id</td>
+                <td>@item.Person</td>
+                <td>@item.Status</td>
+                <td>@item.ExpirationDate</td>
+            </tr>
+        }
+    </tbody>
+</table>

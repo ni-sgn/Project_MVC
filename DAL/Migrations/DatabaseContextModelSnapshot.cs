@@ -297,7 +297,7 @@ namespace DAL.Migrations
                     b.HasOne("DAL.Entities.LawSuitDictionary", "Status")
                         .WithMany("Statuses")
                         .HasForeignKey("StatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 

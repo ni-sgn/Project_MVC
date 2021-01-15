@@ -1,4 +1,5 @@
-﻿using LawSuits.Models;
+﻿using BLL.Interfaces;
+using LawSuits.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Service.Contracts;
@@ -13,19 +14,25 @@ namespace LawSuits.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IUOW _uow;
+        private readonly IPersonOperations _personOperations;
+        private readonly ILawSuitOperations _lawSuitOperations;
 
-        public HomeController(ILogger<HomeController> logger, IUOW uow)
+        public HomeController(ILogger<HomeController> logger, IPersonOperations personOperations, ILawSuitOperations lawSuitOperations)
         {
             _logger = logger;
-            _uow = uow;
+            _personOperations = personOperations;
+            _lawSuitOperations = lawSuitOperations;
         }
 
         public IActionResult Index()
         {
-            var persons = _uow.Person.FindAll();
-            var person = _uow.Person.Get(1);
-            return View(person);
+            
+            LawSuitListVM model2 = new LawSuitListVM()
+            {
+                LawSuits = _lawSuitOperations.GetAll()
+            };
+
+            return View(model2);
         }
 
         public IActionResult Privacy()

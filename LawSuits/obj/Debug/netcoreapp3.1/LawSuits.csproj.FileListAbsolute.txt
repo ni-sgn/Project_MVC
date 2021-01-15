@@ -79,3 +79,7 @@ C:\Users\user\Documents\coding_reps\Project_Final\LawSuits\LawSuits\obj\Debug\ne
 C:\Users\user\Documents\coding_reps\Project_Final\LawSuits\LawSuits\obj\Debug\netcoreapp3.1\LawSuits.genruntimeconfig.cache
 C:\Users\user\Documents\coding_reps\Project_Final\LawSuits\LawSuits\bin\Debug\netcoreapp3.1\Service.dll
 C:\Users\user\Documents\coding_reps\Project_Final\LawSuits\LawSuits\bin\Debug\netcoreapp3.1\Service.pdb
+C:\Users\user\Documents\coding_reps\Project_Final\LawSuits\LawSuits\bin\Debug\netcoreapp3.1\AutoMapper.dll
+C:\Users\user\Documents\coding_reps\Project_Final\LawSuits\LawSuits\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\user\Documents\coding_reps\Project_Final\LawSuits\LawSuits\bin\Debug\netcoreapp3.1\BLL.dll
+C:\Users\user\Documents\coding_reps\Project_Final\LawSuits\LawSuits\bin\Debug\netcoreapp3.1\BLL.pdb
