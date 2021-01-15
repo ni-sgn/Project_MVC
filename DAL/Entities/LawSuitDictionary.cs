@@ -11,6 +11,6 @@ namespace DAL.Entities
 
         public bool HasStatus { get; set; }
 
-        public ICollection<LawSuit> Statuses { get; set; }
+        public ICollection<LawSuit> LawSuits { get; set; }
     }
 }

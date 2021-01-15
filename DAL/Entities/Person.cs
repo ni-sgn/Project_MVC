@@ -21,6 +21,5 @@ namespace DAL.Entities
 
         public ICollection<LawSuit> LawSuits { get; set; }
         public PersonType Type { get; set; }
-        
     }
 }

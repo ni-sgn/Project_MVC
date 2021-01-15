@@ -56,6 +56,12 @@ namespace DAL.Context
                 .HasForeignKey(e => e.PersonId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<LawSuit>()
+                .HasOne(e => e.Status)
+                .WithMany(e => e.LawSuits)
+                .HasForeignKey(e => e.StatusId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             modelBuilder.Entity<Person>()
                 .HasOne(e => e.Type)
                 .WithMany(e => e.People)

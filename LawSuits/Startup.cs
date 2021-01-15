@@ -1,3 +1,6 @@
+using AutoMapper;
+using BLL.Interfaces;
+using BLL.Operations;
 using DAL.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,7 +34,10 @@ namespace LawSuits
                 options.UseSqlServer(Configuration.GetConnectionString("ProjectDatabase")));
 
             services.AddScoped<IUOW, UOW>();
-
+            //Don't quite understand this one ?????
+            services.AddAutoMapper(typeof(BLL.Mappings.MapProfile).Assembly);
+            services.AddTransient<IPersonOperations, PersonOperations>();
+            services.AddTransient<ILawSuitOperations, LawSuitOperations>();
             services.AddControllersWithViews();
         }
 

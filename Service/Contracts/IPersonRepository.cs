@@ -7,5 +7,6 @@ namespace Service.Contracts
 {
     public interface IPersonRepository : IRepositoryBase<Person>
     {
+        IEnumerable<Person> GetAll();
     }
 }

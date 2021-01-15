@@ -1,5 +1,6 @@
 ﻿using DAL.Context;
 using DAL.Entities;
+using Microsoft.EntityFrameworkCore;
 using Service.Contracts;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,11 @@ namespace Service.Repositories
             : base(context)
         {
 
+        }
+
+        public IEnumerable<Person> GetAll()
+        {
+            return Context.People.Include(x => x.Type);
         }
     }
 }
