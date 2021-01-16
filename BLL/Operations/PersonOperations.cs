@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
 using BLL.DTOs.Person;
 using BLL.Interfaces;
+using DAL.Entities;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Service.Contracts;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace BLL.Operations
@@ -28,6 +31,22 @@ namespace BLL.Operations
         {
             var people = _uow.Person.GetAll();
             return _mapper.Map<IEnumerable<PersonListDTO>>(people);
+        }
+
+        public PersonCUComponents GetPersonFormComponents()
+        {
+            var dictionaries = _uow.LawSuitDictionary.GetPersonFormComponents();
+            PersonCUComponents model = new PersonCUComponents();
+            model.Cities = dictionaries.Where(x => x.HasCity).Select(x => new SelectListItem() { Text = x.Name, Value = x.Id.ToString() }).ToList();
+            model.Types = dictionaries.Where(x => x.HasPersonType).Select(x => new SelectListItem() { Text = x.Name, Value = x.Id.ToString() }).ToList();
+
+            return model;
+        }
+
+        public void CreatePerson(PersonCUDTO model)
+        {
+            var person = _mapper.Map<Person>(model);
+            _uow.Person.Create(person);
         }
     }
 }

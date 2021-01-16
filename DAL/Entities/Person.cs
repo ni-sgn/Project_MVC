@@ -14,12 +14,14 @@ namespace DAL.Entities
         public string CompanyName { get; set; }
         public string CompanyId { get; set; }
 
-        public string PhoneNumber { get; set; }
-        public string City { get; set; }
-
+        
+        
+        public int CityId { get; set; }
         public int TypeId { get; set; }
 
         public ICollection<LawSuit> LawSuits { get; set; }
-        public PersonType Type { get; set; }
+        public ICollection<PhoneNumber> Numbers { get; set; }
+        public LawSuitDictionary Type { get; set; }
+        public LawSuitDictionary City { get; set; }
     }
 }

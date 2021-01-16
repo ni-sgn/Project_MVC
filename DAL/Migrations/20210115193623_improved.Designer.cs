@@ -4,14 +4,16 @@ using DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAL.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20210115193623_improved")]
+    partial class improved
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,17 +28,23 @@ namespace DAL.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Body")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("ExpirationDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("PersonId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("RegistrationDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("StatusId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -50,10 +58,12 @@ namespace DAL.Migrations
                         new
                         {
                             Id = 1,
+                            Body = "This is a lawsuit",
+                            CreationDate = new DateTime(1992, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ExpirationDate = new DateTime(2000, 12, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PersonId = 1,
-                            RegistrationDate = new DateTime(1992, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StatusId = 1
+                            StatusId = 1,
+                            Title = "I don't like when someone violates my freedom"
                         });
                 });
 
@@ -65,9 +75,6 @@ namespace DAL.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool>("HasCity")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("HasPersonType")
                         .HasColumnType("bit");
 
                     b.Property<bool>("HasPhoneType")
@@ -88,7 +95,6 @@ namespace DAL.Migrations
                         {
                             Id = 1,
                             HasCity = false,
-                            HasPersonType = false,
                             HasPhoneType = false,
                             HasStatus = true,
                             Name = "Ongoing"
@@ -97,7 +103,6 @@ namespace DAL.Migrations
                         {
                             Id = 2,
                             HasCity = false,
-                            HasPersonType = false,
                             HasPhoneType = false,
                             HasStatus = true,
                             Name = "Finished"
@@ -106,7 +111,6 @@ namespace DAL.Migrations
                         {
                             Id = 3,
                             HasCity = false,
-                            HasPersonType = false,
                             HasPhoneType = false,
                             HasStatus = true,
                             Name = "Rejected"
@@ -115,7 +119,6 @@ namespace DAL.Migrations
                         {
                             Id = 4,
                             HasCity = false,
-                            HasPersonType = false,
                             HasPhoneType = false,
                             HasStatus = true,
                             Name = "Stalled"
@@ -124,7 +127,6 @@ namespace DAL.Migrations
                         {
                             Id = 5,
                             HasCity = false,
-                            HasPersonType = false,
                             HasPhoneType = true,
                             HasStatus = false,
                             Name = "Mobile"
@@ -133,7 +135,6 @@ namespace DAL.Migrations
                         {
                             Id = 6,
                             HasCity = false,
-                            HasPersonType = false,
                             HasPhoneType = true,
                             HasStatus = false,
                             Name = "Home"
@@ -142,7 +143,6 @@ namespace DAL.Migrations
                         {
                             Id = 7,
                             HasCity = true,
-                            HasPersonType = false,
                             HasPhoneType = false,
                             HasStatus = false,
                             Name = "Tbilisi"
@@ -151,28 +151,9 @@ namespace DAL.Migrations
                         {
                             Id = 8,
                             HasCity = true,
-                            HasPersonType = false,
                             HasPhoneType = false,
                             HasStatus = false,
                             Name = "Batumi"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            HasCity = false,
-                            HasPersonType = true,
-                            HasPhoneType = false,
-                            HasStatus = false,
-                            Name = "Private"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            HasCity = false,
-                            HasPersonType = true,
-                            HasPhoneType = false,
-                            HasStatus = false,
-                            Name = "Legal"
                         });
                 });
 
@@ -220,7 +201,34 @@ namespace DAL.Migrations
                             FirstName = "person1",
                             LastName = "lastname1",
                             PersonalId = "010203030",
-                            TypeId = 9
+                            TypeId = 1
+                        });
+                });
+
+            modelBuilder.Entity("DAL.Entities.PersonType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PersonTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Private"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Legal"
                         });
                 });
 
@@ -254,7 +262,7 @@ namespace DAL.Migrations
                             Id = 1,
                             Number = "555-555-555",
                             PersonId = 1,
-                            TypeId = 5
+                            TypeId = 1
                         });
                 });
 
@@ -376,13 +384,13 @@ namespace DAL.Migrations
             modelBuilder.Entity("DAL.Entities.Person", b =>
                 {
                     b.HasOne("DAL.Entities.LawSuitDictionary", "City")
-                        .WithMany("PersonCities")
+                        .WithMany("People")
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("DAL.Entities.LawSuitDictionary", "Type")
-                        .WithMany("PersonTypes")
+                    b.HasOne("DAL.Entities.PersonType", "Type")
+                        .WithMany("People")
                         .HasForeignKey("TypeId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();

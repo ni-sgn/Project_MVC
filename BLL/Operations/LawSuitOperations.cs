@@ -26,5 +26,7 @@ namespace BLL.Operations
             // transfer the result into business schemas
             return _mapper.Map<IEnumerable<LawSuitListDTO>>(LawSuits);
         }
+
+
     }
 }

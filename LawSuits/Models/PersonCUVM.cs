@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace LawSuits.Models
 {
-    public class PersonListVM
+    public class PersonCUVM
     {
-        public IEnumerable<PersonListDTO> People { get; set; }
+        public PersonCUDTO Person { get; set; }
+
+        public PersonCUComponents Components { get; set; }
+
     }
 }

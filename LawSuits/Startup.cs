@@ -38,6 +38,7 @@ namespace LawSuits
             services.AddAutoMapper(typeof(BLL.Mappings.MapProfile).Assembly);
             services.AddTransient<IPersonOperations, PersonOperations>();
             services.AddTransient<ILawSuitOperations, LawSuitOperations>();
+            services.AddTransient<ISystemUserOperations, SystemUserOperations>();
             services.AddControllersWithViews();
         }
 

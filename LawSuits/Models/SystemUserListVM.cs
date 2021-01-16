@@ -1,4 +1,4 @@
-﻿using BLL.DTOs.Person;
+﻿using BLL.DTOs.SystemUser;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace LawSuits.Models
 {
-    public class PersonListVM
+    public class SystemUserListVM
     {
-        public IEnumerable<PersonListDTO> People { get; set; }
+        public IEnumerable<SystemUserListDTO> SystemUsers { get; set; }
     }
 }

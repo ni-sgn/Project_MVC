@@ -13,13 +13,19 @@ namespace BLL.DTOs.Person
     {
         public int Id { get; set; }
         
-        public string Type { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PersonalId { get; set; }
 
+        public string CompanyName { get; set; }
+        public string CompanyId { get; set; }
+
         public string PhoneNumber { get; set; }
         public string City { get; set; }
+
+        public string Type { get; set; }
+
+
 
     }
 }
