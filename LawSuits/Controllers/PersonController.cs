@@ -38,6 +38,33 @@ namespace LawSuits.Controllers
             return View(model);
         }
 
+        public IActionResult Create()
+        {
+            var model = GetCreatePersonModel(new PersonCUDTO());
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Create(PersonCUVM model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(GetCreatePersonModel(model.Person));
+            }
+            _personOperations.CreatePerson(model.Person);
+            return RedirectToAction(nameof(Index));
+        }
+
+        private PersonCUVM GetCreatePersonModel(PersonCUDTO person)
+        {
+            PersonCUVM model = new PersonCUVM()
+            {
+                Components = _personOperations.GetPersonFormComponents(),
+                Person = person
+            };
+            return model;
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

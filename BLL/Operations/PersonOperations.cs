@@ -47,6 +47,7 @@ namespace BLL.Operations
         {
             var person = _mapper.Map<Person>(model);
             _uow.Person.Create(person);
+            _uow.Commit();
         }
     }
 }
