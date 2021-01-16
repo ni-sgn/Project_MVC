@@ -1,0 +1,48 @@
+@model PersonListVM
+
+<button>
+    <a asp-action="Create">Create</a>
+</button>
+
+<table class="table table-success table-striped">
+    <thead>
+        <tr>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Personal Id</th>
+            <th scope="col">Company Name</th>
+            <th scope="col">Company Id</th>
+            <th scope="col">City</th>
+            <th scope="col">Type</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td></td>
+            <td><input type="text"/></td>
+            <td>
+                <select>
+                    <option>System Administrator</option>
+                    <option>Judge</option>
+                    <option>Admin</option>
+                    <option>User</option>
+                </select>
+            </td>
+            <td><button>Search</button></td>
+        </tr>
+        @foreach (var item in Model.People)
+        {
+            <tr>
+                <td>@item.FirstName</td>
+                <td>@item.LastName</td>
+                <td>@item.PersonalId</td>
+                <td>@item.CompanyName</td>
+                <td>@item.CompanyId</td>
+                @* <td>@item.PhoneNumber</td> *@
+                <td>@item.City</td>
+                <td>@item.Type</td>
+                <td><button>View Detail</button><button>Edit</button><button>Delete</button></td>
+            </tr>
+        }
+    </tbody>
+</table>
