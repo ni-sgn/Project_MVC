@@ -1,0 +1,74 @@
+﻿@model PersonCUVM
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create a new Person</h1>
+<hr />
+<div>
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger">
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label asp-for="Person.FirstName">Firstname</label>
+                    <input class="form-control" asp-for="Person.FirstName">
+                    <span asp-validation-for="Person.FirstName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label asp-for="Person.LastName">Lastname</label>
+                    <input class="form-control" asp-for="Person.LastName">
+                    <span asp-validation-for="Person.LastName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label asp-for="Person.PersonalId">Personal ID</label>
+                    <input class="form-control" asp-for="Person.PersonalId">
+                    <span asp-validation-for="Person.PersonalId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label asp-for="Person.CompanyName">Company Name</label>
+                    <input class="form-control" asp-for="Person.CompanyName">
+                    <span asp-validation-for="Person.CompanyName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label asp-for="Person.CompanyId">Company ID</label>
+                    <input class="form-control" asp-for="Person.CompanyId">
+                    <span asp-validation-for="Person.CompanyId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label asp-for="Person.TypeId">Type</label>
+                    <select class="form-control" asp-items="Model.Components.Types" asp-for="Person.TypeId"></select>
+                    <span asp-validation-for="Person.TypeId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label asp-for="Person.CityId">City</label>
+                    <select class="form-control" asp-items="Model.Components.Cities" asp-for="Person.CityId"></select>
+                    <span asp-validation-for="Person.CityId" class="text-danger"></span>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">Create</button>
+                <a asp-action="Index">Go back</a>
+            </div>
+        </div>
+
+    </form>
+</div>
+

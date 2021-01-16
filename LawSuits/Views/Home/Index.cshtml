@@ -1,8 +1,46 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model LawSuitListVM
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<button>
+    <a asp-action="Create">Create</a>
+</button>
+
+<table class="table table-success table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Person</th>
+            <th scope="col">Registration Date</th>
+            <th scope="col">Expiration Date</th>
+            <th scope="col">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td></td>
+            <td><input type="text" /></td>
+            <td><input type="date" /></td>
+            <td><input type="date" /></td>
+            <td>
+            <select>
+                <option>Ongoing</option>
+                <option>Stalled</option>
+            </select>
+            </td>
+            <td><button>Search</button></td>
+        </tr>
+        @foreach (var item in Model.LawSuits)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Person</td>
+                <td>@item.RegistrationDate</td>
+                <td>@item.ExpirationDate</td>
+                <td>@item.Status</td>
+                <td><button>Full</button></td>
+                <td><button>Edit</button></td>
+                <td><button>Delete</button></td>
+
+            </tr>
+        }
+    </tbody>
+</table>
