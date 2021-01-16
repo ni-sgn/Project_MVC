@@ -1,4 +1,5 @@
-﻿using BLL.Interfaces;
+﻿using BLL.DTOs.Person;
+using BLL.Interfaces;
 using LawSuits.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -16,23 +17,51 @@ namespace LawSuits.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IPersonOperations _personOperations;
         private readonly ILawSuitOperations _lawSuitOperations;
+        private readonly ISystemUserOperations _systemUserOperations;
 
-        public HomeController(ILogger<HomeController> logger, IPersonOperations personOperations, ILawSuitOperations lawSuitOperations)
+        public HomeController(ILogger<HomeController> logger, IPersonOperations personOperations, ILawSuitOperations lawSuitOperations, ISystemUserOperations systemUserOperations)
         {
             _logger = logger;
             _personOperations = personOperations;
             _lawSuitOperations = lawSuitOperations;
+            _systemUserOperations = systemUserOperations;
         }
 
         public IActionResult Index()
         {
-            
-            LawSuitListVM model2 = new LawSuitListVM()
+
+            LawSuitListVM model = new LawSuitListVM()
             {
                 LawSuits = _lawSuitOperations.GetAll()
             };
+            return View(model);
+        }
 
-            return View(model2);
+        public IActionResult Create()
+        {
+            var model = GetCreatePersonModel(new PersonCUDTO());
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Create(PersonCUVM model)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View(GetCreatePersonModel(model.Person));
+            }
+            _personOperations.CreatePerson(model.Person);
+            return RedirectToAction(nameof(Index));
+        }
+
+        private PersonCUVM GetCreatePersonModel(PersonCUDTO person)
+        {
+            PersonCUVM model = new PersonCUVM()
+            {
+                Components = _personOperations.GetPersonFormComponents(),
+                Person = person
+            };
+            return model;
         }
 
         public IActionResult Privacy()

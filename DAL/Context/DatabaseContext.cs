@@ -18,8 +18,8 @@ namespace DAL.Context
         public DbSet<SystemDictionary> SystemDictionaries { get; set; }
         public DbSet<LawSuit> LawSuits { get; set; }
         public DbSet<Person> People { get; set; }
-        public DbSet<PersonType> PersonTypes { get; set; }
         public DbSet<LawSuitDictionary> LawSuitDictionaries { get; set; }
+        public DbSet<PhoneNumber> PhoneNumbers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -64,7 +64,25 @@ namespace DAL.Context
 
             modelBuilder.Entity<Person>()
                 .HasOne(e => e.Type)
-                .WithMany(e => e.People)
+                .WithMany(e => e.PersonTypes)
+                .HasForeignKey(e => e.TypeId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Person>()
+                .HasOne(e => e.City)
+                .WithMany(e => e.PersonCities)
+                .HasForeignKey(e => e.CityId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<PhoneNumber>()
+                .HasOne(e => e.person)
+                .WithMany(e => e.Numbers)
+                .HasForeignKey(e => e.PersonId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<PhoneNumber>()
+                .HasOne(e => e.Type)
+                .WithMany(e => e.Numbers)
                 .HasForeignKey(e => e.TypeId)
                 .OnDelete(DeleteBehavior.Restrict);
 

@@ -16,7 +16,7 @@ namespace Service.Repositories
 
         public IEnumerable<LawSuit> GetAll()
         {
-            return Context.LawSuits.Include(x=>x.person).Include(x=>x.Status);
+            return Context.LawSuits.Include(x=>x.Status).Include(x=>x.person);
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Service.Repositories
 
         public IEnumerable<Person> GetAll()
         {
-            return Context.People.Include(x => x.Type);
+            return Context.People.Include(x => x.Type).Include(x => x.City);
         }
     }
 }

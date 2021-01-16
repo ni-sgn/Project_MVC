@@ -20,6 +20,8 @@ namespace Service.Repositories
         
         private IPersonRepository _personRepository;
         private ILawSuitRepository _lawSuitRepository;
+        private ISystemUserRepository _systemUserRepository;
+        private IDictionaryRepository _lawSuitDictionaryRepository;
 
         public UOW(DatabaseContext context)
         {
@@ -43,6 +45,27 @@ namespace Service.Repositories
                 if (_lawSuitRepository == null)
                     _lawSuitRepository = new LawSuitRepository(_context);
                 return _lawSuitRepository;
+            }
+        }
+
+        public ISystemUserRepository SystemUser
+        {
+            get
+            {
+                if (_systemUserRepository == null)
+                    _systemUserRepository = new SystemUserRepository(_context);
+                return _systemUserRepository;
+            }
+        }
+
+        //singleton pattern?
+        public IDictionaryRepository LawSuitDictionary
+        {
+            get
+            {
+                if (_lawSuitDictionaryRepository == null)
+                    _lawSuitDictionaryRepository = new DictionaryRepository(_context);
+                return _lawSuitDictionaryRepository;
             }
         }
 

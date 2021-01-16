@@ -16,26 +16,11 @@ namespace DAL.Context
                     Id = 1,
                     FirstName = "person1",
                     LastName = "lastname1",
-                    City = "Tbilisi",
                     PersonalId = "010203030",
-                    PhoneNumber = "555929292",
-                    TypeId = 1,
+                    TypeId = 9,
+                    CityId = 7,
                 }
                 ) ;
-
-            modelBuilder.Entity<PersonType>().HasData(
-                new PersonType()
-                {
-                    Id = 1,
-                    Name = "Private",
-                },
-                new PersonType()
-                {
-                    Id = 2,
-                    Name = "Legal",
-                }
-                ) ;
-
 
             modelBuilder.Entity<SystemUser>().HasData(
                 new SystemUser()
@@ -82,9 +67,7 @@ namespace DAL.Context
                 new LawSuit()
                 {
                     Id = 1,
-                    Body = "This is a lawsuit",
-                    Title = "I don't like when someone violates my freedom",
-                    CreationDate = new DateTime(1992, 12, 12),
+                    RegistrationDate = new DateTime(1992, 12, 12),
                     ExpirationDate = new DateTime(2000, 12, 23),
                     PersonId = 1,
                     StatusId = 1,
@@ -115,6 +98,52 @@ namespace DAL.Context
                     Id = 4,
                     HasStatus = true,
                     Name = "Stalled",
+                },
+                 new LawSuitDictionary()
+                 {
+                     Id = 5,
+                     HasPhoneType = true,
+                     Name = "Mobile",
+                 },
+                 new LawSuitDictionary()
+                 {
+                     Id = 6,
+                     HasPhoneType = true,
+                     Name = "Home",
+                 },
+                 new LawSuitDictionary()
+                 {
+                     Id = 7,
+                     HasCity = true,
+                     Name = "Tbilisi",
+                 },
+                 new LawSuitDictionary()
+                 {
+                     Id = 8,
+                     HasCity = true,
+                     Name = "Batumi",
+                 },
+                 new LawSuitDictionary()
+                 {
+                     Id = 9,
+                     HasPersonType = true,
+                     Name = "Private",
+                 },
+                 new LawSuitDictionary()
+                 {
+                     Id = 10,
+                     HasPersonType = true,
+                     Name = "Legal",
+                 }
+                );
+
+            modelBuilder.Entity<PhoneNumber>().HasData(
+                new PhoneNumber()
+                {
+                    Id = 1,
+                    Number = "555-555-555",
+                    PersonId = 1,
+                    TypeId = 5,
                 }
                 ) ;
 

@@ -8,6 +8,6 @@ namespace LawSuits.Models
 {
     public class PersonListVM
     {
-        public IEnumerable<PersonListDTO> People;
+        public IEnumerable<PersonListDTO> People { get; set; }
     }
 }
