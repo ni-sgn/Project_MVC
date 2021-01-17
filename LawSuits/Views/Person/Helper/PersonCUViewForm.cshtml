@@ -1,0 +1,114 @@
+@model PersonCUVM
+@{
+    int count = 0;
+}
+<div class="row">
+    <div class="col-6">
+        <div class="form-group">
+            <label asp-for="Person.FirstName">Firstname</label>
+            <input class="form-control" asp-for="Person.FirstName">
+            <span asp-validation-for="Person.FirstName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="form-group">
+            <label asp-for="Person.LastName">Lastname</label>
+            <input class="form-control" asp-for="Person.LastName">
+            <span asp-validation-for="Person.LastName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="form-group">
+            <label asp-for="Person.PersonalId">Personal ID</label>
+            <input class="form-control" asp-for="Person.PersonalId">
+            <span asp-validation-for="Person.PersonalId" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="form-group">
+            <label asp-for="Person.CompanyName">Company Name</label>
+            <input class="form-control" asp-for="Person.CompanyName">
+            <span asp-validation-for="Person.CompanyName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="form-group">
+            <label asp-for="Person.CompanyId">Company ID</label>
+            <input class="form-control" asp-for="Person.CompanyId">
+            <span asp-validation-for="Person.CompanyId" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="form-group">
+            <label asp-for="Person.TypeId">Type</label>
+            <select class="form-control" asp-items="Model.Components.Types" asp-for="Person.TypeId"></select>
+            <span asp-validation-for="Person.TypeId" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="form-group">
+            <label asp-for="Person.CityId">City</label>
+            <select class="form-control" asp-items="Model.Components.Cities" asp-for="Person.CityId"></select>
+            <span asp-validation-for="Person.CityId" class="text-danger"></span>
+        </div>
+    </div>
+
+</div>
+<div class="col-12">
+    <div class="row phones">
+        @if (Model.Person != null && Model.Person.Numbers != null)
+        {
+            @foreach (var item in Model.Person.Numbers)
+            {
+                <div class="p-2 mb-5 phone-block">
+                    <div>
+                        <button type="button" class="btn btn-danger remove-att">
+                            Remove
+                        </button>
+                    </div>
+                    <input asp-for="Person.Numbers[count].Id" type="hidden"/>
+                    <div class="form-group">
+                        <label asp-for="Person.Numbers[count].TypeId">Number Type</label>
+                        <select class="form-control" asp-for="Person.Numbers[count].TypeId" asp-items="Model.Components.PhoneTypes"> </select>
+                        <span class="text-danger" asp-validation-for="Person.Numbers[count].TypeId"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Person.Numbers[count].Number">Phone Number</label>
+                        <input class="form-control" type="text" asp-for="Person.Numbers[count].Number">
+                        <span class="text-danger" asp-validation-for="Person.Numbers[count].Number"></span>
+                    </div>
+                </div>
+            }
+        }
+        <div class="template">
+            <div class="p-2 mb-5 phone-block">
+                <div>
+                    <button type="button" class="btn btn-danger remove-att">
+                        Remove
+                    </button>
+                </div>
+                <div class="form-group">
+                    <label for="Person_Numbers_0__TypeId">Number Type</label>
+                    <select class="form-control" data-val="true"
+                        data-val-required="The TypeId field is required." id="Person_Numbers_0__TypeId"
+                        name="Person.Numbers[0].TypeId" asp-items="Model.Components.PhoneTypes"> </select>
+                    <span class="text-danger field-validation-valid" data-valmsg-for="Person.Numbers[0].TypeId"
+                        data-valmsg-replace="true"></span>
+                </div>
+                <div class="form-group">
+                    <label for="Person_Numbers_0__Number">Phone Number</label>
+                    <input class="form-control" type="text" id="Person_Numbers_0__Number"
+                        name="Person.Numbers[0].Number" value="">
+                    <span class="text-danger field-validation-valid" data-valmsg-for="Person.Numbers[0].Number"
+                        data-valmsg-replace="true"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="add-phone m-3">
+        <button type="button" class="btn btn-info" id="add_phone">
+            Add Phone Number
+        </button>
+    </div>
+</div>

@@ -5,6 +5,7 @@ using Service.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace Service.Repositories
 {
@@ -19,6 +20,11 @@ namespace Service.Repositories
         public IEnumerable<Person> GetAll()
         {
             return Context.People.Include(x => x.Type).Include(x => x.City);
+        }
+
+        public Person GetPerson(int id)
+        {
+            return Context.People.Where(x => x.Id == id).Include(x => x.Numbers).FirstOrDefault();
         }
     }
 }

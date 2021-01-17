@@ -43,11 +43,24 @@ namespace BLL.Operations
 
             return model;
         }
+        
+        public PersonCUDTO GetPerson(int id) {
+            var person = _uow.Person.GetPerson(id);
+            return _mapper.Map<PersonCUDTO>(person);
+        }
 
         public void CreatePerson(PersonCUDTO model)
         {
             var person = _mapper.Map<Person>(model);
             _uow.Person.Create(person);
+            _uow.Commit();
+        }
+
+        public void UpdatePerson(PersonCUDTO model)
+        {
+            var dbPerson = _uow.Person.GetPerson(model.Id);
+            _mapper.Map<PersonCUDTO, Person>(model, dbPerson);
+            _uow.Person.Update(dbPerson);
             _uow.Commit();
         }
     }

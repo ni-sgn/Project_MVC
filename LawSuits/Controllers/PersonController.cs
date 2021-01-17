@@ -54,6 +54,28 @@ namespace LawSuits.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        
+        public IActionResult Update(int id)
+        {
+            var person = _personOperations.GetPerson(id);
+            var model = GetCreatePersonModel(person);
+            return View(model);
+        }
+        
+        [HttpPost]
+        public IActionResult Update(PersonCUVM model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(GetCreatePersonModel(model.Person));
+            }
+            _personOperations.UpdatePerson(model.Person);
+
+            var viewModel = GetCreatePersonModel(model.Person);
+            ViewBag.Message = "Person Data Update Successful";
+            return View(viewModel);
+        }
+
         private PersonCUVM GetCreatePersonModel(PersonCUDTO person)
         {
             PersonCUVM model = new PersonCUVM()

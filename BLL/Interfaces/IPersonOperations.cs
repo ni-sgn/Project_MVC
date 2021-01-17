@@ -7,8 +7,10 @@ namespace BLL.Interfaces
 {
     public interface IPersonOperations
     {
-        public IEnumerable<PersonListDTO> GetAll();
-        public PersonCUComponents GetPersonFormComponents();
-        public void CreatePerson(PersonCUDTO model);
+        IEnumerable<PersonListDTO> GetAll();
+        PersonCUComponents GetPersonFormComponents();
+        void CreatePerson(PersonCUDTO model);
+        PersonCUDTO GetPerson(int id);
+        void UpdatePerson(PersonCUDTO model);
     }
 }
