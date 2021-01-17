@@ -30,7 +30,6 @@ namespace LawSuits.Controllers
 
         public IActionResult Index()
         {
-
             PersonListVM model = new PersonListVM()
             {
                 People = _personOperations.GetAll()

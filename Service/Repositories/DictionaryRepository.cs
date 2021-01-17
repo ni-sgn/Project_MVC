@@ -18,7 +18,7 @@ namespace Service.Repositories
 
         public IEnumerable<LawSuitDictionary>  GetPersonFormComponents()
         {
-            return FindByCondition(x => x.HasPersonType || x.HasCity);
+            return FindByCondition(x => x.HasPersonType || x.HasCity || x.HasPhoneType);
         }
     }
 }

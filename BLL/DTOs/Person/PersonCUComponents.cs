@@ -9,7 +9,6 @@ namespace BLL.DTOs.Person
     {
         public List<SelectListItem> Types { get; set; }
         public List<SelectListItem> Cities { get; set; }
+        public List<SelectListItem> PhoneTypes { get; set; }
     }
-
-
 }

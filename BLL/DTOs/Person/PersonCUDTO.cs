@@ -10,7 +10,7 @@ namespace BLL.DTOs.Person
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Required")]
-        [StringLength(maximumLength:50, MinimumLength =2, ErrorMessage = "min 2 and max 50 symbols")]
+        [StringLength(maximumLength: 50, MinimumLength = 2, ErrorMessage = "min 2 and max 50 symbols")]
         public string FirstName { get; set; }
 
         [Required(ErrorMessage = "Required")]
@@ -24,7 +24,7 @@ namespace BLL.DTOs.Person
         public string PersonalId { get; set; }
 
         [Required(ErrorMessage = "Required")]
-        [StringLength(maximumLength:50, MinimumLength = 2, ErrorMessage = "min 2 and max 50 symbols")]
+        [StringLength(maximumLength: 50, MinimumLength = 2, ErrorMessage = "min 2 and max 50 symbols")]
         public string CompanyName { get; set; }
 
 

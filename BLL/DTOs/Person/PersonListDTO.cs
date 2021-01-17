@@ -25,7 +25,5 @@ namespace BLL.DTOs.Person
 
         public string Type { get; set; }
 
-
-
     }
 }

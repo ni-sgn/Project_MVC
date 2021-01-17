@@ -39,6 +39,7 @@ namespace BLL.Operations
             PersonCUComponents model = new PersonCUComponents();
             model.Cities = dictionaries.Where(x => x.HasCity).Select(x => new SelectListItem() { Text = x.Name, Value = x.Id.ToString() }).ToList();
             model.Types = dictionaries.Where(x => x.HasPersonType).Select(x => new SelectListItem() { Text = x.Name, Value = x.Id.ToString() }).ToList();
+            model.PhoneTypes = dictionaries.Where(x => x.HasPhoneType).Select(x => new SelectListItem() { Text = x.Name, Value = x.Id.ToString() }).ToList();
 
             return model;
         }
