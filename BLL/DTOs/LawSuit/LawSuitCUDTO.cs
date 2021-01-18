@@ -13,7 +13,7 @@ namespace BLL.DTOs.LawSuit
         [Required(ErrorMessage = "Required")]
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        public DateTime CreationDate { get; set; }
+        public DateTime RegistrationDate { get; set; }
 
         [Required(ErrorMessage = "Required")]
         [DataType(DataType.Date)]

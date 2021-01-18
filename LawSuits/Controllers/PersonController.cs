@@ -19,13 +19,11 @@ namespace LawSuits.Controllers
     {
         private readonly ILogger<PersonController> _logger;
         private readonly IPersonOperations _personOperations;
-        private readonly ILawSuitOperations _lawSuitOperations;
 
-        public PersonController(ILogger<PersonController> logger, IPersonOperations personOperations, ILawSuitOperations lawSuitOperations)
+        public PersonController(ILogger<PersonController> logger, IPersonOperations personOperations)
         {
             _logger = logger;
             _personOperations = personOperations;
-            _lawSuitOperations = lawSuitOperations;
         }
 
         public IActionResult Index()

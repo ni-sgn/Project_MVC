@@ -8,5 +8,6 @@ namespace Service.Contracts
     public interface IDictionaryRepository : IRepositoryBase<LawSuitDictionary>
     {
         IEnumerable<LawSuitDictionary> GetPersonFormComponents();
+        IEnumerable<LawSuitDictionary> GetLawSuitFormComponents();
     }
 }
