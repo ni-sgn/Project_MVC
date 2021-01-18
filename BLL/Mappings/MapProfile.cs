@@ -29,17 +29,7 @@ namespace BLL.Mappings
                 .ForMember(dest =>
                 dest.Person,
                 opt => opt.MapFrom(src => src.person.FirstName));
-
             CreateMap<LawSuitCUDTO, LawSuit>();
-
-            CreateMap<SystemUser, SystemUserListDTO>()
-                .ForMember(dest =>
-                dest.Type,
-                opt => opt.MapFrom(src => src.Type.Name))
-                .ForMember(dest =>
-                dest.Position,
-                opt => opt.MapFrom(src => src.Position.Name)
-                );
 
             CreateMap<PhoneNumberDTO, PhoneNumber>();
             CreateMap<PhoneNumber, PhoneNumberDTO>();

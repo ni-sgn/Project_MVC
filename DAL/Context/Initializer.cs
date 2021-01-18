@@ -22,19 +22,6 @@ namespace DAL.Context
                 }
                 ) ;
 
-            modelBuilder.Entity<SystemUser>().HasData(
-                new SystemUser()
-                {
-                    Id = 1,
-                    FirstName = "Name1",
-                    LastName = "Lastnam1",
-                    PersonalId = "123123112",
-                    BirthDate = new DateTime(1992,02,23),
-                    PositionId = 1,
-                    TypeId = 3
-                }
-                );
-
             modelBuilder.Entity<SystemDictionary>().HasData(
                new SystemDictionary()
                {

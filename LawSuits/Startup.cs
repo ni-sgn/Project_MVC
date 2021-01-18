@@ -2,6 +2,7 @@ using AutoMapper;
 using BLL.Interfaces;
 using BLL.Operations;
 using DAL.Context;
+using DAL.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -15,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace LawSuits
 {
@@ -33,12 +35,22 @@ namespace LawSuits
             services.AddDbContext<DatabaseContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("ProjectDatabase")));
 
+            services.AddIdentity<SystemUser, IdentityRole>(opts =>
+            {
+                opts.Password.RequiredLength = 6;
+                opts.User.RequireUniqueEmail = true;
+                opts.Password.RequireDigit = false;
+                opts.Password.RequireLowercase = false;
+                opts.Password.RequireUppercase = false;
+            })
+                .AddEntityFrameworkStores<DatabaseContext>()
+                .AddDefaultTokenProviders();
             services.AddScoped<IUOW, UOW>();
             //Don't quite understand this one ?????
             services.AddAutoMapper(typeof(BLL.Mappings.MapProfile).Assembly);
             services.AddTransient<IPersonOperations, PersonOperations>();
             services.AddTransient<ILawSuitOperations, LawSuitOperations>();
-            services.AddTransient<ISystemUserOperations, SystemUserOperations>();
+            // services.AddTransient<ISystemUserOperations, SystemUserOperations>();
             services.AddControllersWithViews();
         }
 
@@ -59,6 +71,8 @@ namespace LawSuits
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

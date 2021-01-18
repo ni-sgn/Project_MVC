@@ -3,10 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace DAL.Context
 {
-    public class DatabaseContext : DbContext
+    public class DatabaseContext : IdentityDbContext<SystemUser>
     {
         public DatabaseContext(DbContextOptions options)
             : base(options)
@@ -31,24 +32,6 @@ namespace DAL.Context
             modelBuilder.Entity<SystemUser>()
                 .Property(e => e.LastName)
                 .IsRequired();
-            modelBuilder.Entity<SystemUser>()
-                .Property(e => e.PersonalId)
-                .IsRequired();
-            modelBuilder.Entity<SystemUser>()
-                .Property(e => e.BirthDate)
-                .IsRequired();
-
-            modelBuilder.Entity<SystemUser>()
-                .HasOne(e => e.Position)
-                .WithMany(e => e.UserPositions)
-                .HasForeignKey(e => e.PositionId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<SystemUser>()
-                .HasOne(e => e.Type)
-                .WithMany(e => e.UserTypes)
-                .HasForeignKey(e => e.TypeId)
-                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<LawSuit>()
                 .HasOne(e => e.person)

@@ -8,7 +8,7 @@ namespace Service.Contracts
     {
         IPersonRepository Person { get; }
         ILawSuitRepository LawSuit { get; }
-        ISystemUserRepository SystemUser { get; }
+        // ISystemUserRepository SystemUser { get; }
         IDictionaryRepository LawSuitDictionary { get; }
 
         void Commit();

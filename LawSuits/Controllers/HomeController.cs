@@ -9,22 +9,22 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LawSuits.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IPersonOperations _personOperations;
         private readonly ILawSuitOperations _lawSuitOperations;
-        private readonly ISystemUserOperations _systemUserOperations;
 
-        public HomeController(ILogger<HomeController> logger, IPersonOperations personOperations, ILawSuitOperations lawSuitOperations, ISystemUserOperations systemUserOperations)
+        public HomeController(ILogger<HomeController> logger, IPersonOperations personOperations, ILawSuitOperations lawSuitOperations)
         {
             _logger = logger;
             _personOperations = personOperations;
             _lawSuitOperations = lawSuitOperations;
-            _systemUserOperations = systemUserOperations;
         }
 
         public IActionResult Index()
