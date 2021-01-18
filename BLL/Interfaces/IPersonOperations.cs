@@ -12,5 +12,6 @@ namespace BLL.Interfaces
         void CreatePerson(PersonCUDTO model);
         PersonCUDTO GetPerson(int id);
         void UpdatePerson(PersonCUDTO model);
+        void DeletePerson(int id);
     }
 }

@@ -19,11 +19,13 @@ namespace LawSuits.Controllers
     {
         private readonly ILogger<PersonController> _logger;
         private readonly IPersonOperations _personOperations;
+        private readonly ILawSuitOperations _lawSuitOperations;
 
-        public PersonController(ILogger<PersonController> logger, IPersonOperations personOperations)
+        public PersonController(ILogger<PersonController> logger, IPersonOperations personOperations, ILawSuitOperations lawSuitOperations)
         {
             _logger = logger;
             _personOperations = personOperations;
+            _lawSuitOperations = lawSuitOperations;
         }
 
         public IActionResult Index()
@@ -52,14 +54,14 @@ namespace LawSuits.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        
+
         public IActionResult Update(int id)
         {
             var person = _personOperations.GetPerson(id);
             var model = GetCreatePersonModel(person);
             return View(model);
         }
-        
+
         [HttpPost]
         public IActionResult Update(PersonCUVM model)
         {
@@ -74,6 +76,27 @@ namespace LawSuits.Controllers
             return View(viewModel);
         }
 
+        public IActionResult Detail(int id)
+        {
+            var person = _personOperations.GetPerson(id);
+            var model = GetCreatePersonModel(person);
+            return View(model);
+        }
+
+        public IActionResult Delete(int id)
+        {
+            var person = _personOperations.GetPerson(id);
+            var model = GetCreatePersonModel(person);
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(PersonCUVM model)
+        {
+            _personOperations.DeletePerson(model.Person.Id);
+            return Redirect(nameof(Index));
+        }
+        
         private PersonCUVM GetCreatePersonModel(PersonCUDTO person)
         {
             PersonCUVM model = new PersonCUVM()

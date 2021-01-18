@@ -25,7 +25,7 @@ namespace BLL.Operations
             _uow = uow;
             _mapper = mapper;
         }
-       
+
         // Turn DataBase schema into Business schema
         public IEnumerable<PersonListDTO> GetAll()
         {
@@ -43,8 +43,9 @@ namespace BLL.Operations
 
             return model;
         }
-        
-        public PersonCUDTO GetPerson(int id) {
+
+        public PersonCUDTO GetPerson(int id)
+        {
             var person = _uow.Person.GetPerson(id);
             return _mapper.Map<PersonCUDTO>(person);
         }
@@ -61,6 +62,13 @@ namespace BLL.Operations
             var dbPerson = _uow.Person.GetPerson(model.Id);
             _mapper.Map<PersonCUDTO, Person>(model, dbPerson);
             _uow.Person.Update(dbPerson);
+            _uow.Commit();
+        }
+
+        public void DeletePerson(int id)
+        {
+            var dbPerson = _uow.Person.GetPerson(id);
+            _uow.Person.Delete(dbPerson);
             _uow.Commit();
         }
     }

@@ -1,0 +1,24 @@
+@model PersonCUVM
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete Person</h1>
+<hr />
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">@Model.Person.FirstName @Model.Person.LastName</h1>
+        <p class="lead">Are You Sure You Want To Delete This User?</p>
+
+        <form asp-action="Delete">
+            <input asp-for="Person.Id" type="hidden" />
+
+            <div class="col-6">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <a asp-action="Index">Go back</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
