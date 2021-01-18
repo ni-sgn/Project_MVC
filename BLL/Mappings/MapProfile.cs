@@ -30,14 +30,6 @@ namespace BLL.Mappings
                 dest.Person,
                 opt => opt.MapFrom(src => src.person.FirstName));
 
-            CreateMap<SystemUser, SystemUserListDTO>()
-                .ForMember(dest =>
-                dest.Type,
-                opt => opt.MapFrom(src => src.Type.Name))
-                .ForMember(dest =>
-                dest.Position,
-                opt => opt.MapFrom(src => src.Position.Name)
-                );
 
             CreateMap<PhoneNumberDTO, PhoneNumber>();
             CreateMap<PhoneNumber, PhoneNumberDTO>();

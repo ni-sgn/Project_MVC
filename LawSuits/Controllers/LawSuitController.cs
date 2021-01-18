@@ -13,13 +13,11 @@ namespace LawSuits.Controllers
     { 
         private readonly IPersonOperations _personOperations;
         private readonly ILawSuitOperations _lawSuitOperations;
-        private readonly ISystemUserOperations _systemUserOperations;
 
-        public LawSuitController(IPersonOperations personOperations, ILawSuitOperations lawSuitOperations, ISystemUserOperations systemUserOperations)
+        public LawSuitController(IPersonOperations personOperations, ILawSuitOperations lawSuitOperations)        
         {
             _personOperations = personOperations;
             _lawSuitOperations = lawSuitOperations;
-            _systemUserOperations = systemUserOperations;
         }
 
         public IActionResult Index()
