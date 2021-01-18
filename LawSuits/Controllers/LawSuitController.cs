@@ -1,4 +1,5 @@
-﻿using BLL.Interfaces;
+﻿using BLL.DTOs.LawSuit;
+using BLL.Interfaces;
 using LawSuits.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,15 +12,11 @@ namespace LawSuits.Controllers
 {
     public class LawSuitController : Controller
     { 
-        private readonly IPersonOperations _personOperations;
         private readonly ILawSuitOperations _lawSuitOperations;
-        private readonly ISystemUserOperations _systemUserOperations;
 
-        public LawSuitController(IPersonOperations personOperations, ILawSuitOperations lawSuitOperations, ISystemUserOperations systemUserOperations)
+        public LawSuitController(ILawSuitOperations lawSuitOperations)
         {
-            _personOperations = personOperations;
             _lawSuitOperations = lawSuitOperations;
-            _systemUserOperations = systemUserOperations;
         }
 
         public IActionResult Index()
@@ -30,6 +27,33 @@ namespace LawSuits.Controllers
                 LawSuits = _lawSuitOperations.GetAll()
             };
             return View(model);
+        }
+
+        public IActionResult Create()
+        {
+            var model = GetCreateLawSuitModel(new LawSuitCUDTO());
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Create(LawSuitCUVM model)
+        {
+            if(!ModelState.IsValid)
+            {
+                View(GetCreateLawSuitModel(new LawSuitCUDTO()));
+            }
+            _lawSuitOperations.CreateLawSuit(model.LawSuit);
+            return RedirectToAction(nameof(Index));
+        }
+
+        private LawSuitCUVM GetCreateLawSuitModel(LawSuitCUDTO lawsuit)
+        {
+            LawSuitCUVM model = new LawSuitCUVM()
+            {
+                LawSuit = lawsuit,
+                Components = _lawSuitOperations.GetLawSuitCUComponents(),
+            };
+            return model;
         }
 
         public IActionResult Privacy()

@@ -20,5 +20,10 @@ namespace Service.Repositories
         {
             return FindByCondition(x => x.HasPersonType || x.HasCity || x.HasPhoneType);
         }
+
+        public IEnumerable<LawSuitDictionary> GetLawSuitFormComponents()
+        {
+            return FindByCondition(x => x.HasStatus);
+        }
     }
 }

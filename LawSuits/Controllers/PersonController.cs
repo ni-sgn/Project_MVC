@@ -17,15 +17,11 @@ namespace LawSuits.Controllers
     {
         private readonly ILogger<PersonController> _logger;
         private readonly IPersonOperations _personOperations;
-        private readonly ILawSuitOperations _lawSuitOperations;
-        private readonly ISystemUserOperations _systemUserOperations;
 
-        public PersonController(ILogger<PersonController> logger, IPersonOperations personOperations, ILawSuitOperations lawSuitOperations, ISystemUserOperations systemUserOperations)
+        public PersonController(ILogger<PersonController> logger, IPersonOperations personOperations)
         {
             _logger = logger;
             _personOperations = personOperations;
-            _lawSuitOperations = lawSuitOperations;
-            _systemUserOperations = systemUserOperations;
         }
 
         public IActionResult Index()
