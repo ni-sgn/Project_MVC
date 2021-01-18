@@ -30,6 +30,8 @@ namespace BLL.Mappings
                 dest.Person,
                 opt => opt.MapFrom(src => src.person.FirstName));
 
+            CreateMap<LawSuitCUDTO, LawSuit>();
+
             CreateMap<SystemUser, SystemUserListDTO>()
                 .ForMember(dest =>
                 dest.Type,
