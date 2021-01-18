@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20210115193623_improved")]
-    partial class improved
+    [Migration("20210118115352_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,23 +28,17 @@ namespace DAL.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Body")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime>("ExpirationDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("PersonId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("RegistrationDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("StatusId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -58,12 +52,10 @@ namespace DAL.Migrations
                         new
                         {
                             Id = 1,
-                            Body = "This is a lawsuit",
-                            CreationDate = new DateTime(1992, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ExpirationDate = new DateTime(2000, 12, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PersonId = 1,
-                            StatusId = 1,
-                            Title = "I don't like when someone violates my freedom"
+                            RegistrationDate = new DateTime(1992, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StatusId = 1
                         });
                 });
 
@@ -75,6 +67,9 @@ namespace DAL.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool>("HasCity")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("HasPersonType")
                         .HasColumnType("bit");
 
                     b.Property<bool>("HasPhoneType")
@@ -95,6 +90,7 @@ namespace DAL.Migrations
                         {
                             Id = 1,
                             HasCity = false,
+                            HasPersonType = false,
                             HasPhoneType = false,
                             HasStatus = true,
                             Name = "Ongoing"
@@ -103,6 +99,7 @@ namespace DAL.Migrations
                         {
                             Id = 2,
                             HasCity = false,
+                            HasPersonType = false,
                             HasPhoneType = false,
                             HasStatus = true,
                             Name = "Finished"
@@ -111,6 +108,7 @@ namespace DAL.Migrations
                         {
                             Id = 3,
                             HasCity = false,
+                            HasPersonType = false,
                             HasPhoneType = false,
                             HasStatus = true,
                             Name = "Rejected"
@@ -119,6 +117,7 @@ namespace DAL.Migrations
                         {
                             Id = 4,
                             HasCity = false,
+                            HasPersonType = false,
                             HasPhoneType = false,
                             HasStatus = true,
                             Name = "Stalled"
@@ -127,6 +126,7 @@ namespace DAL.Migrations
                         {
                             Id = 5,
                             HasCity = false,
+                            HasPersonType = false,
                             HasPhoneType = true,
                             HasStatus = false,
                             Name = "Mobile"
@@ -135,6 +135,7 @@ namespace DAL.Migrations
                         {
                             Id = 6,
                             HasCity = false,
+                            HasPersonType = false,
                             HasPhoneType = true,
                             HasStatus = false,
                             Name = "Home"
@@ -143,6 +144,7 @@ namespace DAL.Migrations
                         {
                             Id = 7,
                             HasCity = true,
+                            HasPersonType = false,
                             HasPhoneType = false,
                             HasStatus = false,
                             Name = "Tbilisi"
@@ -151,9 +153,28 @@ namespace DAL.Migrations
                         {
                             Id = 8,
                             HasCity = true,
+                            HasPersonType = false,
                             HasPhoneType = false,
                             HasStatus = false,
                             Name = "Batumi"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            HasCity = false,
+                            HasPersonType = true,
+                            HasPhoneType = false,
+                            HasStatus = false,
+                            Name = "Private"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            HasCity = false,
+                            HasPersonType = true,
+                            HasPhoneType = false,
+                            HasStatus = false,
+                            Name = "Legal"
                         });
                 });
 
@@ -201,34 +222,7 @@ namespace DAL.Migrations
                             FirstName = "person1",
                             LastName = "lastname1",
                             PersonalId = "010203030",
-                            TypeId = 1
-                        });
-                });
-
-            modelBuilder.Entity("DAL.Entities.PersonType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PersonTypes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Private"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Legal"
+                            TypeId = 9
                         });
                 });
 
@@ -262,7 +256,7 @@ namespace DAL.Migrations
                             Id = 1,
                             Number = "555-555-555",
                             PersonId = 1,
-                            TypeId = 1
+                            TypeId = 5
                         });
                 });
 
@@ -319,13 +313,22 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("DAL.Entities.SystemUser", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("BirthDate")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -335,35 +338,191 @@ namespace DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PersonalId")
-                        .IsRequired()
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PositionId")
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("SystemDictionaryId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TypeId")
+                    b.Property<int?>("SystemDictionaryId1")
                         .HasColumnType("int");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PositionId");
+                    b.HasIndex("NormalizedEmail")
+                        .HasName("EmailIndex");
 
-                    b.HasIndex("TypeId");
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("SystemUsers");
+                    b.HasIndex("SystemDictionaryId");
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            BirthDate = new DateTime(1992, 2, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FirstName = "Name1",
-                            LastName = "Lastnam1",
-                            PersonalId = "123123112",
-                            PositionId = 1,
-                            TypeId = 3
-                        });
+                    b.HasIndex("SystemDictionaryId1");
+
+                    b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedName")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens");
                 });
 
             modelBuilder.Entity("DAL.Entities.LawSuit", b =>
@@ -384,13 +543,13 @@ namespace DAL.Migrations
             modelBuilder.Entity("DAL.Entities.Person", b =>
                 {
                     b.HasOne("DAL.Entities.LawSuitDictionary", "City")
-                        .WithMany("People")
+                        .WithMany("PersonCities")
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("DAL.Entities.PersonType", "Type")
-                        .WithMany("People")
+                    b.HasOne("DAL.Entities.LawSuitDictionary", "Type")
+                        .WithMany("PersonTypes")
                         .HasForeignKey("TypeId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -413,16 +572,63 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("DAL.Entities.SystemUser", b =>
                 {
-                    b.HasOne("DAL.Entities.SystemDictionary", "Position")
+                    b.HasOne("DAL.Entities.SystemDictionary", null)
                         .WithMany("UserPositions")
-                        .HasForeignKey("PositionId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .HasForeignKey("SystemDictionaryId");
+
+                    b.HasOne("DAL.Entities.SystemDictionary", null)
+                        .WithMany("UserTypes")
+                        .HasForeignKey("SystemDictionaryId1");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("DAL.Entities.SystemUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("DAL.Entities.SystemUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DAL.Entities.SystemDictionary", "Type")
-                        .WithMany("UserTypes")
-                        .HasForeignKey("TypeId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                    b.HasOne("DAL.Entities.SystemUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("DAL.Entities.SystemUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

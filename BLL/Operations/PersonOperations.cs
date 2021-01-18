@@ -65,6 +65,8 @@ namespace BLL.Operations
             _uow.Commit();
         }
 
+
+
         public void DeletePerson(int id)
         {
             var dbPerson = _uow.Person.GetPerson(id);
