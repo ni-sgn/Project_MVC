@@ -35,7 +35,8 @@ namespace LawSuits
             services.AddDbContext<DatabaseContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("ProjectDatabase")));
 
-            services.AddIdentity<SystemUser, IdentityRole>(opts => {
+            services.AddIdentity<SystemUser, IdentityRole>(opts =>
+            {
                 opts.Password.RequiredLength = 6;
                 opts.User.RequireUniqueEmail = true;
                 opts.Password.RequireDigit = false;
@@ -70,6 +71,8 @@ namespace LawSuits
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
