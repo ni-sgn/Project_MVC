@@ -96,7 +96,7 @@ namespace LawSuits.Controllers
             _personOperations.DeletePerson(model.Person.Id);
             return RedirectToAction(nameof(Index));
         }
-        
+        //Just for a message
         private PersonCUVM GetCreatePersonModel(PersonCUDTO person)
         {
             PersonCUVM model = new PersonCUVM()
