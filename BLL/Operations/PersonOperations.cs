@@ -33,6 +33,25 @@ namespace BLL.Operations
             return _mapper.Map<IEnumerable<PersonListDTO>>(people);
         }
 
+        public IEnumerable<PersonListDTO> SearchByNameAndType(string searchName, string searchType)
+        {
+            var people = _uow.Person.GetAll();
+            if (searchType == "0" && searchName != null)
+            {
+                people = _uow.Person.FindPersonByCondition(el => el.PersonalId.Contains(searchName));
+            }
+            else if (searchType != "0" && searchName == null)
+            {
+                people = _uow.Person.FindPersonByCondition(el => el.Type.Id == Int32.Parse(searchType));
+            }
+            else if (searchType != "0" && searchName != null)
+            {
+                people = _uow.Person.FindPersonByCondition(el => el.PersonalId.Contains(searchName) && el.Type.Id == Int32.Parse(searchType));
+            }
+
+            return _mapper.Map<IEnumerable<PersonListDTO>>(people);
+        }
+
         public PersonCUComponents GetPersonFormComponents()
         {
             var dictionaries = _uow.LawSuitDictionary.GetPersonFormComponents();
@@ -64,8 +83,6 @@ namespace BLL.Operations
             _uow.Person.Update(dbPerson);
             _uow.Commit();
         }
-
-
 
         public void DeletePerson(int id)
         {

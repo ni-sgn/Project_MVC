@@ -10,5 +10,7 @@ namespace Service.Contracts
         IEnumerable<Person> GetAll();
         
         Person GetPerson(int id);
+
+        public IEnumerable<Person> FindPersonByCondition(System.Linq.Expressions.Expression<Func<Person, bool>> expression);
     }
 }

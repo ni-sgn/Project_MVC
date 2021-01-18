@@ -37,6 +37,16 @@ namespace LawSuits.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public IActionResult Index(string searchName, string searchType)
+        {
+            PersonListVM model = new PersonListVM()
+            {
+                People = _personOperations.SearchByNameAndType(searchName, searchType)
+            };
+            return View(model);
+        }
+
         public IActionResult Create()
         {
             var model = GetCreatePersonModel(new PersonCUDTO());

@@ -13,5 +13,6 @@ namespace BLL.Interfaces
         PersonCUDTO GetPerson(int id);
         void UpdatePerson(PersonCUDTO model);
         void DeletePerson(int id);
+        IEnumerable<PersonListDTO> SearchByNameAndType(string searchName, string searchType);
     }
 }
