@@ -46,6 +46,7 @@ namespace BLL.Mappings
                 dest.Numbers,
                 opt => opt.MapFrom(src => src.Numbers.Select(x => new PhoneNumberDTO() { Id = x.Id, Number = x.Number, TypeId = x.TypeId }).ToList()));
 
+            CreateMap<LawSuit, LawSuitCUDTO>();
         }
     }
 }

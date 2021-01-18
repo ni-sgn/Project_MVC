@@ -49,6 +49,36 @@ namespace BLL.Operations
             return model;
         }
 
+        public LawSuitCUDTO GetLawSuit(int Id)
+        {
+            var lawsuit = _uow.LawSuit.GetLawSuit(Id);
+            return _mapper.Map<LawSuitCUDTO>(lawsuit);
+        }
+
+        public void UpdateLawSuit(LawSuitCUDTO lawsuit)
+        {
+            LawSuit dbModel = _uow.LawSuit.GetLawSuit(lawsuit.Id);
+            _mapper.Map<LawSuitCUDTO, LawSuit>(lawsuit, dbModel);
+            _uow.LawSuit.Update(dbModel);
+            _uow.Commit();
+        }
+
+        public void DeleteLawSuit(int Id)
+        {
+            var lawsuit = _uow.LawSuit.GetLawSuit(Id);
+            _uow.LawSuit.Delete(lawsuit);
+            _uow.Commit();
+        }
+
+
+        public IEnumerable<LawSuitListDTO> GetByStatusType(string StatusType)
+        {
+            // Sql Query
+            var LawSuits = _uow.LawSuit.GetByStatusType(e => e.StatusId == Int32.Parse(StatusType));
+            // transfer the result into business schemas
+            return _mapper.Map<IEnumerable<LawSuitListDTO>>(LawSuits);
+        }
+
 
     }
 }

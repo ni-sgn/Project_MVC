@@ -10,5 +10,9 @@ namespace BLL.Interfaces
         public IEnumerable<LawSuitListDTO> GetAll();
         public LawSuitCUComponents GetLawSuitCUComponents();
         public void CreateLawSuit(LawSuitCUDTO model);
+        public LawSuitCUDTO GetLawSuit(int Id);
+        public void UpdateLawSuit(LawSuitCUDTO lawsuit);
+        public void DeleteLawSuit(int Id);
+        public IEnumerable<LawSuitListDTO> GetByStatusType(string StatusType);
     }
 }

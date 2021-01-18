@@ -31,6 +31,17 @@ namespace LawSuits.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public IActionResult Index(string StatusType)
+        {
+
+            LawSuitListVM model = new LawSuitListVM()
+            {
+                LawSuits = _lawSuitOperations.GetByStatusType(StatusType)
+            };
+            return View(model);
+        }
+
         public IActionResult Create()
         {
             var model = GetCreateLawSuitModel(new LawSuitCUDTO());
@@ -48,6 +59,27 @@ namespace LawSuits.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public IActionResult Update(int Id)
+        {
+            var lawsuit = _lawSuitOperations.GetLawSuit(Id);
+            var model = GetCreateLawSuitModel(lawsuit);
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Update(LawSuitCUVM model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(GetCreateLawSuitModel(model.LawSuit));
+            }
+            _lawSuitOperations.UpdateLawSuit(model.LawSuit);
+
+            var viewModel = GetCreateLawSuitModel(model.LawSuit);
+            ViewBag.Message = "Lawsuit Data Update Successful";
+            return View(viewModel);
+        }
+
         private LawSuitCUVM GetCreateLawSuitModel(LawSuitCUDTO lawsuit)
         {
             LawSuitCUVM model = new LawSuitCUVM()
@@ -57,6 +89,13 @@ namespace LawSuits.Controllers
             };
             return model;
         }
+
+        public IActionResult Delete(int Id)
+        {
+            _lawSuitOperations.DeleteLawSuit(Id);
+            return RedirectToAction(nameof(Index));
+        }
+
 
         public IActionResult Privacy()
         {

@@ -16,19 +16,21 @@
     </thead>
     <tbody>
         <tr>
-            <td></td>
-            <td><input type="text" /></td>
-            <td><input type="date" /></td>
-            <td><input type="date" /></td>
-            <td>
-                <select>
-                    <option>Ongoing</option>
-                    <option>Stalled</option>
-                    <option>Rejected</option>
-                    <option>Finished</option>
-                </select>
-            </td>
-            <td><button>Search</button></td>
+                <form asp-action="Index">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    <select name="StatusType">
+                        <option value="1">Ongoing</option>
+                        <option value="4">Stalled</option>
+                        <option value="3">Rejected</option>
+                        <option value="2">Finished</option>
+                    </select>
+                </td>
+                <td><input type="submit" value="search"/></td>
+            </form>
         </tr>
         @foreach (var item in Model.LawSuits)
         {
@@ -38,8 +40,8 @@
                 <td>@item.RegistrationDate</td>
                 <td>@item.ExpirationDate</td>
                 <td>@item.Status</td>
-                <td><button>Edit</button></td>
-                <td><button>Delete</button></td>
+                <td><button><a asp-controller="LawSuit" asp-action="Update" asp-route-id="@item.Id">Edit</a></button></td>
+                <td><button><a asp-controller="LawSuit" asp-action="Delete" asp-route-id="@item.Id">Delete</a></button></td>
 
             </tr>
         }
