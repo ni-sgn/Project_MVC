@@ -37,7 +37,7 @@ namespace DAL.Context
                 .HasOne(e => e.person)
                 .WithMany(e => e.LawSuits)
                 .HasForeignKey(e => e.PersonId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<LawSuit>()
                 .HasOne(e => e.Status)
@@ -61,7 +61,7 @@ namespace DAL.Context
                 .HasOne(e => e.person)
                 .WithMany(e => e.Numbers)
                 .HasForeignKey(e => e.PersonId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<PhoneNumber>()
                 .HasOne(e => e.Type)

@@ -94,7 +94,7 @@ namespace LawSuits.Controllers
         public IActionResult Delete(PersonCUVM model)
         {
             _personOperations.DeletePerson(model.Person.Id);
-            return Redirect(nameof(Index));
+            return RedirectToAction(nameof(Index));
         }
         
         private PersonCUVM GetCreatePersonModel(PersonCUDTO person)
